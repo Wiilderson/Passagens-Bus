@@ -1,0 +1,37 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Horários Disponíveis</h2>
+
+    <!-- Exibe os detalhes da pesquisa -->
+    <div class="mb-4">
+        <h4>Origem: <strong>{{ schedulesData.origin }}</strong></h4>
+        <h4>Destino: <strong>{{ schedulesData.destination }}</strong></h4>
+        <h4>Data da Viagem: <strong>{{ schedulesData.travelDate }}</strong></h4>
+    </div>
+
+    <!-- Verifica se há horários disponíveis -->
+    <div *ngIf="filteredSchedules.length > 0; else noSchedules">
+        <div class="row">
+            <div class="col-md-6" *ngFor="let schedule of filteredSchedules">
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ schedule.busCompany }}</h5>
+                        <p class="card-text">
+                            <strong>Saída:</strong> {{ schedule.departureTime }}<br />
+                            <strong>Chegada:</strong> {{ schedule.arrivalTime }}<br />
+                            <strong>Preço:</strong> {{ schedule.price }}
+                        </p>
+                        <button class="btn btn-primary">Comprar Passagem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Caso não haja horários -->
+    <ng-template #noSchedules>
+        <div class="alert alert-warning text-center">
+            <h5>Nenhum horário disponível para esta rota.</h5>
+            <p>Por favor, tente outra rota ou data.</p>
+        </div>
+    </ng-template>
+</div>
