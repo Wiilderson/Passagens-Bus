@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Pesquisar Passagens de Ônibus</h2>
+  <form (ngSubmit)="searchTickets()">
+    <div class="row g-3">
+      <!-- Origem -->
+      <div class="col-md-6 position-relative">
+        <label for="origin" class="form-label">Origem</label>
+        <input
+          type="text"
+          id="origin"
+          class="form-control"
+          [(ngModel)]="searchData.origin"
+          [ngModelOptions]="{ standalone: true }"
+          (keyup)="filterCities(searchData.origin, 'origin')"
+          placeholder="Digite a cidade de origem"
+        />
+        <ul
+          *ngIf="filteredOriginCities.length > 0"
+          class="list-group position-absolute w-100"
+          style="z-index: 1000"
+        >
+          <li
+            *ngFor="let city of filteredOriginCities"
+            class="list-group-item list-group-item-action"
+            (click)="selectCity(city, 'origin')"
+          >
+            {{ city.name }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Destino -->
+      <div class="col-md-6 position-relative">
+        <label for="destination" class="form-label">Destino</label>
+        <input
+          type="text"
+          id="destination"
+          class="form-control"
+          [(ngModel)]="searchData.destination"
+          [ngModelOptions]="{ standalone: true }"
+          (keyup)="filterCities(searchData.destination, 'destination')"
+          placeholder="Digite a cidade de destino"
+        />
+        <ul
+          *ngIf="filteredDestinationCities.length > 0"
+          class="list-group position-absolute w-100"
+          style="z-index: 1000"
+        >
+          <li
+            *ngFor="let city of filteredDestinationCities"
+            class="list-group-item list-group-item-action"
+            (click)="selectCity(city, 'destination')"
+          >
+            {{ city.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Data da Viagem -->
+    <div class="row g-3 mt-3">
+      <div class="col-md-6">
+        <label for="travelDate" class="form-label">Data da Viagem</label>
+        <input
+          type="date"
+          id="travelDate"
+          class="form-control"
+          [(ngModel)]="searchData.travelDate"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+
+    <!-- Botão de Pesquisa -->
+    <div class="mt-4 text-center">
+      <button type="submit" class="btn btn-primary">Pesquisar</button>
+      <!-- [routerLink]="['/lista-passagens']" -->
+    </div>
+  </form>
+</div>

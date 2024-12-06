@@ -1,0 +1,63 @@
+<div class="d-flex flex-column container">
+  <div class="trip-info">
+    <div>
+      {{ selectedSchedule.company.name }}
+    </div>
+    <div class="info-item">
+      <span class="d-flex align-items-center gap-2 justify-content-center">
+        <img src="assets/images/bus.svg" alt="Data de chegada" class="icon" />
+        {{ selectedSchedule.departure.time }}
+        <img
+          src="assets/images/arrow.svg"
+          alt="Hora de chegada"
+          class="icon-arrow"
+        />
+        {{ selectedSchedule.arrival.time }}
+      </span>
+    </div>
+    <div class="info-item">
+      <span class="d-flex flex-column">
+        <span> De: {{ selectedSchedule.from.name }} </span>
+        Para: {{ selectedSchedule.to.name }}
+      </span>
+    </div>
+    <div class="info-item">{{ selectedSchedule.seatClass }}</div>
+    <div class="info-item">
+      R$ {{ selectedSchedule.price.price | number : "1.2-2" }}
+    </div>
+  </div>
+
+  <div class="bus-container">
+    <div class="bus-body">
+      <!-- Frente do ônibus -->
+      <img
+        src="assets/images/frente-horizontal.svg"
+        alt="Frente do ônibus"
+        class="bus-front"
+      />
+
+      <!-- Assentos -->
+      <div class="seats-container">
+        <div
+          class="seat"
+          *ngFor="let seat of seats"
+          [class.occupied]="seat.occupied"
+          [class.free]="!seat.occupied"
+          [style.gridRow]="seat.position.y + 1"
+          [style.gridColumn]="seat.position.x + 1"
+          [attr.data-seat]="seat.seat"
+          (click)="selectSeat(seat)"
+        >
+          {{ seat.seat }}
+        </div>
+      </div>
+
+      <!-- Traseira do ônibus -->
+      <img
+        src="assets/images/traseira-horizontal.svg"
+        alt="Traseira do ônibus"
+        class="bus-back"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Organiza os itens na vertical */
+    justify-content: center;
+    /* Centraliza os itens na vertical */
+    align-items: center;
+    /* Centraliza os itens na horizontal */
+    height: 90vh;
+    /* Faz a container ocupar 100% da altura da tela */
+    padding: 0 15px;
+    /* Adiciona um pouco de espaçamento nas laterais */
+    // background-color: #f8f9fa;
+    /* Cor de fundo suave, opcional */
+}
+
+.trip-info {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* Alinha o texto no centro */
+    margin-bottom: 70px;
+    /* Espaço entre as informações e os assentos */
+    padding: 15px;
+    background-color: #ffffff;
+    /* Fundo branco para as informações */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombras para dar um efeito de destaque */
+    width: 100%;
+    max-width: 800px;
+    /* Limita a largura para não ficar muito largo */
+}
+
+.info-item {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.info-item strong {
+    font-weight: bold;
+}
+
+/* Contêiner principal */
+.bus-container {
+    // margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // padding: 20px;
+    gap: 10px;
+    /* Espaço entre imagens e assentos */
+    background-color: #f8f9fa;
+    border-radius: 65px 65px 50px;
+    border: 2px solid #ddd;
+    width: fit-content;
+}
+
+.bus-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Frente e traseira do ônibus */
+.bus-front img,
+.bus-back img {
+    width: 160px;
+    /* Ajuste o tamanho das imagens conforme necessário */
+}
+
+/* Área dos assentos */
+.seats-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Contêiner de assentos */
+.seats-container {
+    display: grid;
+    grid-template-rows: repeat(5, 40px);
+    /* Número de filas */
+    grid-template-columns: repeat(4, 40px);
+    /* Número de colunas */
+    gap: 10px;
+}
+
+/* Estilo dos assentos */
+.seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.seat.free {
+    background-color: #28a745;
+}
+
+.seat.occupied {
+    background-color: #dc3545;
+    cursor: not-allowed;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+.icon-arrow {
+    width: 16px;
+    height: 16px;
+}
