@@ -1,37 +1,89 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Horários Disponíveis</h2>
+  <h2 class="text-center mb-4">Horários Disponíveis</h2>
 
-    <!-- Exibe os detalhes da pesquisa -->
-    <div class="mb-4">
-        <h4>Origem: <strong>{{ schedulesData.origin }}</strong></h4>
-        <h4>Destino: <strong>{{ schedulesData.destination }}</strong></h4>
-        <h4>Data da Viagem: <strong>{{ schedulesData.travelDate }}</strong></h4>
+  <!-- Exibe os detalhes da pesquisa -->
+  <div class="mb-4">
+    <h4>
+      Origem: <strong>{{ schedulesData.origin }}</strong>
+    </h4>
+    <h4>
+      Destino: <strong>{{ schedulesData.destination }}</strong>
+    </h4>
+    <h4>
+      Data da Viagem: <strong>{{ schedulesData.travelDate }}</strong>
+    </h4>
+  </div>
+
+  <!-- Verifica se há horários disponíveis -->
+  <div *ngIf="schedulesResults.length > 0; else noSchedules" class="container">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Empresa</th>
+          <th>Saída / Chegada</th>
+          <th>Embarque / Desembarque</th>
+          <th>Classe</th>
+          <th>Preço</th>
+          <!-- <th class="text-center">Assentos Disponíveis</th> -->
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of schedulesResults">
+          <td>
+            <!-- src="assets/logos/{{ schedule.company.id }}.png" -->
+            <img
+              alt="{{ schedule.company.name }}"
+              class="img-fluid"
+              style="max-height: 30px"
+            />
+            {{ schedule.company.name }}
+          </td>
+          <td>
+            <span
+              class="d-flex align-items-center gap-2 justify-content-center"
+            >
+              <img
+                src="assets/images/bus.svg"
+                alt="Data de chegada"
+                class="icon"
+              />
+              {{ schedule.departure.time }}
+              <img
+                src="assets/images/arrow.svg"
+                alt="Hora de chegada"
+                class="icon-arrow"
+              />
+              {{ schedule.arrival.time }}
+            </span>
+          </td>
+          <td>
+            <span class="d-flex flex-column">
+              <span> De: {{ schedule.from.name }} </span>
+              Para: {{ schedule.to.name }}
+            </span>
+          </td>
+          <td>{{ schedule.seatClass }}</td>
+          <td>R$ {{ schedule.price.price | number : "1.2-2" }}</td>
+          <!-- <td class="">{{ schedule.availableSeats }}</td> -->
+          <td>
+            <button
+              class="btn btn-primary btn-sm"
+              [routerLink]="['/assentos-disponiveis', schedule.id]"
+            >
+              Comprar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Caso não haja horários -->
+  <ng-template #noSchedules>
+    <div class="alert alert-warning text-center">
+      <h5>Nenhum horário disponível para esta rota.</h5>
+      <p>Por favor, tente outra rota ou data.</p>
     </div>
-
-    <!-- Verifica se há horários disponíveis -->
-    <div *ngIf="filteredSchedules.length > 0; else noSchedules">
-        <div class="row">
-            <div class="col-md-6" *ngFor="let schedule of filteredSchedules">
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ schedule.busCompany }}</h5>
-                        <p class="card-text">
-                            <strong>Saída:</strong> {{ schedule.departureTime }}<br />
-                            <strong>Chegada:</strong> {{ schedule.arrivalTime }}<br />
-                            <strong>Preço:</strong> {{ schedule.price }}
-                        </p>
-                        <button class="btn btn-primary">Comprar Passagem</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Caso não haja horários -->
-    <ng-template #noSchedules>
-        <div class="alert alert-warning text-center">
-            <h5>Nenhum horário disponível para esta rota.</h5>
-            <p>Por favor, tente outra rota ou data.</p>
-        </div>
-    </ng-template>
+  </ng-template>
 </div>

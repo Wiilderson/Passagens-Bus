@@ -1,0 +1,32 @@
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+.icon-arrow {
+    width: 16px;
+    height: 16px;
+}
+
+
+th,
+td {
+    border: 1px solid #ddd;
+    /* Adiciona borda às células */
+    padding: 8px;
+    /* Espaçamento interno */
+    text-align: center;
+    /* Centraliza o texto */
+    vertical-align: middle;
+    /* Alinha verticalmente */
+    min-height: 50px;
+    /* Altura mínima */
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Mostra "..." para texto longo */
+    white-space: nowrap;
+    /* Evita quebra de linha */
+}
